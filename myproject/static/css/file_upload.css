@@ -1,0 +1,14 @@
+#file-main {
+    /*background-color: #3399ff;*/
+    text-align: left;
+    height: 745px;
+}
+.file-show-area {
+    float: right;
+    width: 800px;
+    height: 743px;
+    margin-right: 30px;
+    border: 1px solid #9a9b9a;
+    border-radius: 3px;
+    background-color: #CCCCCC;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/file_show.css' %}">
+</head>
+<body>
+
+    <table width="760px" border="1">
+        <tr>
+            <th>文件名称</th>
+            <th>文件下载</th>
+            <th>文件详情</th>
+        </tr>
+        {% for file in all_upload_files %}
+            <tr>
+                <td width="530px" style="text-align: center">
+                    <div style="width: 530px;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">
+                        {{ file.file_name }}
+                    </div>
+                </td>
+                <td width="152px" style="text-align: center">
+                    <a style="text-decoration: none" href="{% url 'app_pic:file_download' %}?file_name={{ file.file_name }}&file_path={{ file.file_path }}">
+                        下载
+                    </a>
+                </td>
+                <td width="76px" style="text-align: center">
+                    <a style="text-decoration: none" href="{% url 'app_pic:file_desc' %}?file_id={{ file.id }}">
+                        查看
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+</html>

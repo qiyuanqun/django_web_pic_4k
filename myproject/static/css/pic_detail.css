@@ -1,0 +1,56 @@
+.pic-detail-info-left {
+    float: left;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    background-color: #cccccc;
+}
+.pic-detail-info-left-name {
+    width: 850px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 18px;
+}
+.pic-detail-info-left img {
+    width: 850px;
+    height: 390px;
+}
+
+
+
+
+
+
+
+.pic-detail-info-right {
+    float: right;
+    width: 320px;
+    /*background-color: chartreuse;*/
+}
+
+.xiazai {
+    height: 60px;
+    line-height: 60px;
+    background-color: greenyellow;
+}
+.xiazai a {
+    font-size: 25px;
+    text-decoration: none;
+}
+.info {
+    text-align: left;
+    margin-top: 12px;
+    padding: 32px 38px;
+    height: 100px;
+    background-color: antiquewhite;
+}
+.info div {
+    margin-bottom: 12px;
+}
+
+
+
+
+#other {
+    height: 150px;
+    /*background-color: red;*/
+}

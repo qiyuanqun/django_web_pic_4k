@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>{{ file.file_name }}</h2>
+<h4>{{ file.file_desc | safe }}</h4>
+<span>上传用户:{{ file.file_user.username }}</span>&nbsp;&nbsp;&nbsp;
+<span>上传时间:{{ file.file_up_time }}</span>&nbsp;&nbsp;&nbsp;
+<span>大小:{{ file.file_size }}kb</span>&nbsp;&nbsp;&nbsp;
+<span>下载量:{{ file.file_down_num }}</span>&nbsp;&nbsp;&nbsp;<br>
+<span>{{ MEDIA_URL }}{{ file.file_path }}</span>
+</body>
+</html>

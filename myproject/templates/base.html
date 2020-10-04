@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+	<meta charset="utf-8">
+	<title>4k图片网</title>
+	<link rel="shortcut icon" href="{% static 'images/head_img.ico' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+</head>
+<body>
+    <div id="base-head">
+        <div class="base-head-nav-bar">
+            <div class="base-head-nav-bar-left">
+                <a href="{% url 'app_pic:index' %}?cls=4k美女">4k美女</a>
+                <a href="{% url 'app_pic:index' %}?cls=4k动漫">4k动漫</a>
+                <a href="{% url 'app_pic:index' %}?cls=4k影视">4k影视</a>
+                <a href="{% url 'app_pic:index' %}?cls=4k动物">4k动物</a>
+                <a href="{% url 'app_pic:file_upload' %}">文件共享</a>
+            </div>
+            <div class="base-head-nav-bar-center">
+                <form action="/search" method="get">
+                    <span>
+                        <input class="base-head-nav-bar-center-input" type="text" name="q" placeholder="请输入壁纸名称">
+                    </span>
+                    <span>
+                        <input class="base-head-nav-bar-center-button" type="submit" value="搜索">
+                    </span>
+
+                </form>
+            </div>
+            <div class="base-head-nav-bar-right">
+                {% if request.user.is_authenticated %}
+                    <div title="{{ user.username }}" style="float: left;margin-left: 9%;width: 65px;overflow: hidden;text-overflow: ellipsis;white-space:nowrap;color: #B0E2FF;">
+                        {{ user.username }}
+                    </div>
+                    <a href="{% url 'app_pic:logout' %}">注销</a>
+                {% else %}
+                    <a href="{% url 'app_pic:register' %}">注册</a>
+                    <a href="{% url 'app_pic:login' %}">登录</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div id="base-main">
+        <div class="base-main-container">
+            {% block extra_main %}{% endblock extra_main %}
+        </div>
+    </div>
+
+    <div id="base-foot">
+            <p>该站中所有图片均从　http://pic.netbian.com/　爬虫爬取得到</p>
+    </div>
+</body>
+</html>

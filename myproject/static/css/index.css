@@ -1,0 +1,25 @@
+#index-img-list li {
+    display: inline-block;
+    list-style: none;
+    margin: 5px 7px;
+}
+#index-img-list img {
+    width: 390px;
+    height: 248.73px;
+}
+#index-paginator {
+    height: 100px;
+    padding-top: 100px;
+}
+#index-paginator a {
+    display: inline-block;
+	background-color: #fff;
+	padding: 0px 16px;
+	border: 1px solid #ddd;
+	height: 36px;
+	line-height: 36px;
+	margin: 0px 4px 0px 5px;
+	font-size: 18px;
+	border-radius: 3px;
+	text-decoration: none;
+}

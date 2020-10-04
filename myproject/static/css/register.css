@@ -1,0 +1,17 @@
+#register-form {
+    text-align: left;
+    width: 280px;
+    margin: 200px auto;
+    padding: 25px 10px;
+    border-radius: 3px;
+    background-color: #989FA9;
+}
+#register-form input {
+    width: 275px;
+    height: 35px;
+    font-size: 16px;
+    margin: 2px 0px 5px 0px;
+    border: 1px solid #9a9b9a;
+    border-radius: 3px;
+    background-color: #CCCCCC;
+}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock extra_css %}
+
+{% block extra_main %}
+    <div style="height: 588px;">
+        <div id="register-form">
+            <form method="post">
+                {% csrf_token %}
+                <p>用户名:</p><input type="text" name="username"><br>
+                <p>密码:</p><input type="password" name="password"><br>
+                <input style="width: 277px;height: 37px;font-size: larger" type="submit" value="登     录"><br>
+                <h4 style="color: crimson">{{ error }}</h4>
+            </form>
+        </div>
+    </div>
+
+{% endblock extra_main %}

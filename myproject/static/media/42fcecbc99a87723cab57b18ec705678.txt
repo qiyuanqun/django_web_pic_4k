@@ -1,0 +1,217 @@
+安装
+    sudo apt install mysql-server
+    sudo apt install mysql-client
+
+
+字段类型
+    5种： 整数、浮点数、字符串、日期时间、枚举
+
+    整数：
+        tinyint：通常存储年龄等小的数字
+        smallint
+        int/integer：默认有符号，无符号需要用int unsigned
+        bigint
+    
+    浮点数：
+        decimal：带两个参数，如decimal(5,2)表示5位数，其中2位是小数位
+
+    字符串：
+        char：指定固定长度，不足的前面空格填充，占内存，不建议使用
+        varchar：指定可变长度
+        text：存储大文本用，通常字符大于4000时使用
+        特别的，对于图片、音视频等不直接存于数据库中，而是上传到某服务器，并在数据库中存放其上传路径
+
+    日期时间：
+        date：'2020-02-02'
+        time：'12:23:58'
+        datetime：'2020-01-01 12:24:34'
+        year：'2018'
+
+    枚举：
+        enum：如enum("男", "女", "保密")，枚举可用下标取值，1开始
+
+
+字段约束
+    6种：主键、自增长、非空、唯一性、默认、外键
+
+    主键约束：
+        primary key：物理上的存储顺序
+    
+    自增长约束：
+        auto_increment：有该约束的字段在插入数据时不填则自动填写，填则不能是已有的值
+
+    非空约束：
+        not null：此字段填写值不允许为空
+
+    唯一性约束：
+        unique：此字段填写的值不允许重复
+
+    默认约束：
+        default：没填写此字段时用默认值,如default "保密"
+
+    外键约束：
+        存储指定表的主键的字段叫外键，即该字段包含指定表中的一行数据（一个记录）
+        foreign key：此字段填写的值必须包含在指定表的主键中，若不在则填写失败且抛出异常
+
+
+操作数据库
+    链接数据库：
+        mysql -u用户 -p密码
+
+    退出：
+        exit/quit/ctrl+d
+
+    SQL语句以分号";"结尾
+
+    查看所有数据库：
+        show databases;
+
+    创建数据库：
+        create database 数据库名 charset=utf8;
+
+    查看当前所使用的数据库：
+        select database();
+
+    切换使用的数据库：
+        use 数据库名;
+
+    删除数据库：
+        drop database 数据库名;
+
+
+操作数据表
+    查看所有的数据表：
+        show tables;
+
+    查看表结构：
+        desc 数据表名;
+
+    创建数据表：
+        create table 数据表名(字段 类型 约束, ...);  最后字段不用逗号结尾
+
+    修改表结构：
+        对数据表进行修改用alter
+
+        添加字段：
+            alter table 表名 add 字段名 类型 约束;
+ 
+        修改字段（对字段重命名）:
+            alter table 表名 change 字段原名 字段新名 类型 约束;
+
+        修改字段（不对字段重命名）:
+            alter table 表名 modify 字段名 类型 约束;
+
+        删除字段：
+            alter table 表名 drop 字段名;
+
+    删除数据表：
+        drop table 数据表名;
+
+
+-----------------------------------------------------------------------------------------------
+例子
+创建student表(id name age high gender cls_id)
+    create table student(
+        id int unsigned not null auto_increment primary key,
+        name varchar(30),
+        age tinyint unsigned,
+        high decimal(5,2),
+        gender enum("男", "女", "保密") default "保密"
+    );
+----------------------------------------------------------------------------------------------
+
+
+操作数据表中的数据
+    增加数据：
+        insert into 表名 values(必须对应每个字段进行输入，包括自增长和默认字段);
+        insert into 表名(字段1，字段2...) values(对应字段的值),(同时插入多条数据);
+
+    更新数据：
+        update 表名 set 字段1=值，字段2=值... 后面可加筛选条件;
+
+    删除数据：
+        不建议用，用逻辑删除,用一个字段表示是否删除
+        delete from 表名 后面可加筛选条件;
+
+    查询数据：
+        select * from 表名;
+        select 字段1,字段2...(可用as起别名，查询结果字段名即别名) from 表名;
+        
+        查看字段中有哪些值：
+            distinct表示去重
+            select distinct 字段 from 表名;
+
+        条件查询：
+            > < >= <= = !=  and or not
+            and 和 or 的左右分别是一个表达式
+            如 where not age<=18 and gender=2  表示年龄大于18并且是女性   
+
+        模糊查询：
+            like
+                %  替换任意个
+                _  替换一个
+            rlike  正则
+            where name="小%; 等价于where name like "小%";   表示以小开头
+            name rlike "^同.*$"  表示以同开头
+
+        范围查询：
+            非连续  [not] in(1,2,3)
+            连续  [not] between...and...   不能not(between...and...)
+            判空  is [not] null
+
+        排序：
+            order by 字段1,字段2... asc[升]/desc[降]
+
+        聚合函数：
+            count(字段/*)  select count(*) from ...
+            max() min() sum() avg()
+
+        分组：
+            group by 字段  只能结合count(*)进行统计，不能结合查询字段使用
+            select count(*) from student group by gender;
+            各性别分别有多少数据：select gender,count(*) from student group by gender;
+
+            各性别分别有姓名（字段）：select gender,group_concat(name) from student group by gender;
+
+
+            不能用select */name from student group by gender;
+
+        having:
+            其出现的原因是where不能同聚合函数一起使用
+            条件：订单金额总数小于2000  having sum(price)<2000
+
+            对原表中的数据进行过滤用where，对查询出来的结果集过滤用having
+
+        分页：
+            limit start,count  从0开始表示第一行数据  这个条件只能放在最后面
+
+        连接查询（多表查询）：
+            内连接：
+                 表1 inner join 表2 on 条件
+                select */s.name,c.name from students as s inner join classes as c on s.cls=c.id;
+
+            外连接：
+                 左连接:left join ... on ...  以左表为基准，右表不满足条件的的用Null填充，可能会比内连接多出几行数据  右连接没有意义
+  
+            子查询：select嵌套
+                select .......where height = select max(height).....   注意条件字段要一致
+
+
+视图
+    将查询的结果作为一张表(虚拟表),但也当真正的表对待，作用是方便查询数据(比如同时多次查询多张表时，用视图方便多)，而不是改数据(其数据不可改)
+
+    并没有创建一张表，而是虚拟的，它只是从原表中取数据而已，原表改怎么改还是怎么改
+
+
+事务
+    它是一个操作系列，这些操作要么一起执行，要么都不执行，它是一个不可分割的单位
+
+    特性(ACID)
+        A 原子性：不可分割
+        C 一致性：要么一起执行，要么都不执行
+        I 隔离性：互不影响
+        D 持久性：一旦提交，事务所做的修改将永久保存到数据库
+
+
+索引
+    

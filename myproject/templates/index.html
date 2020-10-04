@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+{% endblock extra_css %}
+
+{% block extra_main %}
+    <ul id="index-img-list">
+        {% for pic in page_pic.object_list %}
+            <li>
+                <a href="{% url 'app_pic:pic_detail' %}?pic_id={{ pic.id }}">
+                    <img src="{% static 'pic_4k/imgs' %}/{{ pic.img_path }}">
+                </a>
+            </li>
+        {% endfor %}
+        {% if page_pic.has_next %}
+            <li>
+                    <a href="?cls={{ cls }}&page={{ page_pic.next_page_number }}">
+                        <img src="{% static 'images/下一页.jpg' %}">
+                    </a>
+            </li>
+        {% else %}
+            <li>
+                    <a style="pointer-events: none;">
+                        <img src="{% static 'images/下一页.jpg' %}">
+                    </a>
+            </li>
+        {% endif %}
+    </ul>
+
+    <div id="index-paginator">
+        {% if page_pic.has_previous %}
+            <a href="{% url 'app_pic:index' %}?cls={{ cls }}&page={{ page_pic.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        {% for pindex in page_range %}
+            {% if pindex == page_pic.number %}
+                <a style="pointer-events: none;background-color: aqua">{{ pindex }}</a>
+            {% else %}
+                <a href="{% url 'app_pic:index' %}?cls={{ cls }}&page={{ pindex }}">{{ pindex }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_pic.has_next %}
+            <a href="{% url 'app_pic:index' %}?cls={{ cls }}&page={{ page_pic.next_page_number }}">下一页</a>
+        {% endif %}
+    </div>
+{% endblock extra_main %}

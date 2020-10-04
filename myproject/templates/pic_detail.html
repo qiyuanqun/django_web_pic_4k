@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/pic_detail.css' %}">
+{% endblock extra_css %}
+
+{% block extra_main %}
+    <div style="height: 460px">
+        <div class="pic-detail-info-left">
+            <div class="pic-detail-info-left-name">
+                {{ pic.img_name }}
+            </div>
+            <img src="{% static 'pic_4k/imgs' %}/{{ pic.img_path }}" alt="">
+        </div>
+
+        <div class="pic-detail-info-right">
+            <div class="xiazai">
+                <a href="">下载原图</a>
+            </div>
+            <div class="info">
+                <div>分类&nbsp&nbsp{{ pic.img_cls }}</div>
+                <div>大小&nbsp&nbsp{{ pic.img_size }}</div>
+                <div>上传时间&nbsp&nbsp{{ pic.img_cre_time }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="other"></div>
+{% endblock extra_main %}

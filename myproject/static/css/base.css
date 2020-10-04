@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-width: 1260px;
+}
+#base-head {
+    height: 95px;
+    line-height: 95px;
+    background-color: #535353;
+}
+#base-main {
+    /*background-color: #cccccc;*/
+}
+#base-foot {
+    height: 95px;
+    text-align: center;
+    line-height: 95px;
+    background-color: #b3c7e1;
+}
+.base-head-nav-bar {
+    width: 1260px;
+    margin: 0 auto;
+    /*background-color: chartreuse;*/
+}
+.base-head-nav-bar-left,.base-head-nav-bar-center,.base-head-nav-bar-right {
+    display: inline-block;
+}
+.base-head-nav-bar-left {
+    width: 55%;
+    /*background-color: rosybrown;*/
+}
+.base-head-nav-bar-center {
+    width: 25%;
+    /*background-color: blueviolet;*/
+}
+.base-head-nav-bar-right {
+    width: 18%;
+    /*background-color: cadetblue;*/
+}
+.base-head-nav-bar a {
+    color: #B0E2FF;  /*字体颜色*/
+    font-size: 20px;  /*字体大小*/
+    text-decoration: none;  /*去除下划线*/
+    margin-left: 9%;
+}
+.base-head-nav-bar-center-input {
+    width: 200px;  /*宽*/
+    font-size: 14px;  /*字体大小*/
+    border: 0px solid #ccc;  /*边框样式*/
+    outline: none;  /*关闭轮廓*/
+    padding: 7px 5px;  /*内边距*/
+}
+.base-head-nav-bar-center-button {
+    width: 30px;
+    height: 30px;
+    border: 0px;
+    cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+    outline: none; /* 不显示轮廓线 */
+    margin-left: -2px;
+}
+.base-main-container {
+    width: 1260px;
+    margin: 5px auto;
+    text-align: center;
+    /*background-color: blue;*/
+}
